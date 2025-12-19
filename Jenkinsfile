@@ -16,6 +16,11 @@ pipeline {
                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
+        stage("stop docker container") {
+            steps {
+                sh "docker rm -f ${CONTAINER_NAME} || true"
+            }
+        }
         stage("build docker container") {
             steps {
                 sh """
